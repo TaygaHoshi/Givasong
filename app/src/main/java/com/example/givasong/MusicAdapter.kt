@@ -14,6 +14,7 @@ class MusicAdapter (private val mMusic: List<Music>) : RecyclerView.Adapter<Musi
         // for any view that will be set as you render a row
         val musicNameTextView: TextView = itemView.findViewById<TextView>(R.id.music_name)
         val artistNameTextView: TextView = itemView.findViewById<TextView>(R.id.artist_name)
+        val durationTextView: TextView = itemView.findViewById<TextView>(R.id.musicDuration)
     }
 
     // ... constructor and member variables
@@ -32,6 +33,8 @@ class MusicAdapter (private val mMusic: List<Music>) : RecyclerView.Adapter<Musi
         // Get the data model based on position
         val tempMusic: Music = mMusic[position]
         // Set item views based on your views and data model
+        val musicDurationView = viewHolder.durationTextView
+        musicDurationView.text = tempMusic.duration
         val musicNameView = viewHolder.musicNameTextView
         musicNameView.text = tempMusic.name
         val artistNameView = viewHolder.artistNameTextView
