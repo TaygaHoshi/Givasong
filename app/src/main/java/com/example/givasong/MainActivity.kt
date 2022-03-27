@@ -1,19 +1,29 @@
 package com.example.givasong
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
+
 class MainActivity : AppCompatActivity() {
-    lateinit var musics: ArrayList<Music>
+    private lateinit var musics: ArrayList<Music>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val rvContacts = findViewById<View>(R.id.rvMusic) as RecyclerView
-        // Initialize contacts
+        // get recycler view into variable
+        val rvContacts: RecyclerView = findViewById<RecyclerView>(R.id.rvMusic)
+
+        // horizontal line splitting decoration
+        rvContacts.addItemDecoration(
+            DividerItemDecoration(
+                rvContacts.getContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
+        // Initialize music
         musics = Music.createMusicsList(20)
         // Create adapter passing in the sample user data
         val adapter = MusicAdapter(musics)
@@ -21,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         rvContacts.adapter = adapter
         // Set layout manager to position the items
         rvContacts.layoutManager = LinearLayoutManager(this)
-        // That's all!
     }
 }
 
