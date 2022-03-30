@@ -14,15 +14,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // get recycler view into variable
-        val rvContacts: RecyclerView = findViewById<RecyclerView>(R.id.rvMusic)
+        val rvContacts: RecyclerView = findViewById(R.id.rvMusic)
 
         // horizontal line splitting decoration
+        /*
         rvContacts.addItemDecoration(
             DividerItemDecoration(
-                rvContacts.getContext(),
+                rvContacts.context,
                 DividerItemDecoration.VERTICAL
             )
         )
+         */
+
         // Initialize music
         musics = Music.createMusicsList(20)
         // Create adapter passing in the sample user data

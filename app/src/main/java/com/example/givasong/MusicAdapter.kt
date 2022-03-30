@@ -12,9 +12,9 @@ class MusicAdapter (private val mMusic: List<Music>) : RecyclerView.Adapter<Musi
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Your holder should contain and initialize a member variable
         // for any view that will be set as you render a row
-        val musicNameTextView: TextView = itemView.findViewById<TextView>(R.id.music_name)
-        val artistNameTextView: TextView = itemView.findViewById<TextView>(R.id.artist_name)
-        val durationTextView: TextView = itemView.findViewById<TextView>(R.id.musicDuration)
+        val musicNameTextView: TextView = itemView.findViewById<TextView>(R.id.card_music_name)
+        val artistNameTextView: TextView = itemView.findViewById<TextView>(R.id.card_artist_name)
+        val durationTextView: TextView = itemView.findViewById<TextView>(R.id.card_music_duration)
     }
 
     // ... constructor and member variables
@@ -23,7 +23,7 @@ class MusicAdapter (private val mMusic: List<Music>) : RecyclerView.Adapter<Musi
         val context = parent.context
         val inflater = LayoutInflater.from(context)
         // Inflate the custom layout
-        val contactView = inflater.inflate(R.layout.music_layout, parent, false)
+        val contactView = inflater.inflate(R.layout.muslc_card_layout, parent, false)
         // Return a new holder instance
         return ViewHolder(contactView)
     }
