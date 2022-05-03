@@ -50,7 +50,7 @@
             android:layout_marginTop="150dp"
             android:hint="@string/sample_duration"
             android:minHeight="60dp"
-            android:inputType="text"
+            android:inputType="time"
             android:autofillHints="Duration" />
 
         <Button
