@@ -22,10 +22,6 @@ class AddForm  : AppCompatActivity() {
             addMusic(durationBox, artistBox, nameBox)
         }
 
-
-
-
-
     }
 
 
@@ -42,6 +38,10 @@ class AddForm  : AppCompatActivity() {
             putString("Saved", sharedPref.getString("Saved", "") + temp)
             apply()
         }
+
+        durationBox.text.clear()
+        artistBox.text.clear()
+        nameBox.text.clear()
     }
 
 }
