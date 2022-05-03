@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Givasong</string>
     <string name="add_music_fab">Add music</string>
-    <string name="sample_artist_text">Sample Artist</string>
-    <string name="sample_music_text">Sample Music</string>
+    <string name="sample_artist_text">Artist Name</string>
+    <string name="sample_music_text">Music Name</string>
     <string name="sample_duration">01:00</string>
     <string name="randomize_text">Givasong!</string>
+    <string name="add_music_button">Add Music!</string>
 </resources>

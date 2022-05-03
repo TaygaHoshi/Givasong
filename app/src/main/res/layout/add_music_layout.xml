@@ -22,7 +22,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:hint="@string/sample_artist_text"
-            android:minHeight="60dp" />
+            android:minHeight="60dp"
+            android:inputType="text"
+            android:autofillHints="Artist" />
 
         <EditText
             android:id="@+id/add_music_name"
@@ -34,7 +36,9 @@
             android:layout_marginTop="80dp"
             android:layout_marginBottom="10dp"
             android:hint="@string/sample_music_text"
-            android:minHeight="60dp" />
+            android:minHeight="60dp"
+            android:inputType="text"
+            android:autofillHints="Music" />
 
         <EditText
             android:id="@+id/add_music_duration"
@@ -45,7 +49,9 @@
             android:layout_marginEnd="20dp"
             android:layout_marginTop="150dp"
             android:hint="@string/sample_duration"
-            android:minHeight="60dp" />
+            android:minHeight="60dp"
+            android:inputType="text"
+            android:autofillHints="Duration" />
 
         <Button
             android:id="@+id/add_music_button"
@@ -56,7 +62,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginTop="220dp"
             android:layout_marginBottom="10dp"
-            android:text="Button" />
+            android:text="@string/add_music_button" />
 
     </androidx.cardview.widget.CardView>
 
