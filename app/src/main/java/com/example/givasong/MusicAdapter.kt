@@ -1,12 +1,19 @@
 package com.example.givasong
 
+import android.content.Context
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.RecyclerView
 
 class MusicAdapter (private val mMusic: List<Music>) : RecyclerView.Adapter<MusicAdapter.ViewHolder>(){
+
+    private var selectedPosition = -1 //make it global
+    private lateinit var context: Context
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -20,16 +27,27 @@ class MusicAdapter (private val mMusic: List<Music>) : RecyclerView.Adapter<Musi
     // ... constructor and member variables
     // Usually involves inflating a layout from XML and returning the holder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicAdapter.ViewHolder {
-        val context = parent.context
+        context = parent.context
         val inflater = LayoutInflater.from(context)
         // Inflate the custom layout
         val contactView = inflater.inflate(R.layout.muslc_card_layout, parent, false)
         // Return a new holder instance
+
         return ViewHolder(contactView)
     }
 
     // Involves populating data into the item through holder
     override fun onBindViewHolder(viewHolder: MusicAdapter.ViewHolder, position: Int) {
+
+        if (selectedPosition == position){
+            viewHolder.itemView.setBackgroundColor(context.themeColor(androidx.appcompat.R.attr.colorPrimary))
+
+        }
+        else{
+            viewHolder.itemView.setBackgroundColor(context.themeColor(com.google.android.material.R.attr.colorOnPrimary))
+
+        }
+
         // Get the data model based on position
         val tempMusic: Music = mMusic[position]
         // Set item views based on your views and data model
@@ -45,5 +63,18 @@ class MusicAdapter (private val mMusic: List<Music>) : RecyclerView.Adapter<Musi
     override fun getItemCount(): Int {
         return mMusic.size
     }
+
+    fun chooseRandom(index: Int) {
+
+        selectedPosition = index
+        notifyDataSetChanged()
+
+    }
+
+    @ColorInt
+    fun Context.themeColor(@AttrRes attrRes: Int): Int = TypedValue()
+        .apply { theme.resolveAttribute (attrRes, this, true) }
+        .data
+
 
 }
