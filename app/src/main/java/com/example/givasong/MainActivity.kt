@@ -2,6 +2,7 @@ package com.example.givasong
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         // get FAB into variable
         val fabToAddMusic: FloatingActionButton = findViewById(R.id.floatingActionButton) //startActivity(Intent(this@MainActivity, OtherActivity::class.java))
+        val givasongButton: Button = findViewById(R.id.givasongbutton)
 
         fabToAddMusic.setOnClickListener {
             val intent = Intent(this, AddForm::class.java).apply { }
@@ -45,8 +47,15 @@ class MainActivity : AppCompatActivity() {
         rvContacts.adapter = adapter
         // Set layout manager to position the items
         rvContacts.layoutManager = LinearLayoutManager(this)
-    }
 
+
+
+        givasongButton.setOnClickListener {
+            val chosenIndex = (0 until adapter.itemCount).random()
+            adapter.chooseRandom(chosenIndex)
+        }
+
+    }
 
     private fun getMusicsFromFile(): MutableList<Music> {
 
@@ -74,11 +83,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-
-
-
-
-
         return temp
     }
 
