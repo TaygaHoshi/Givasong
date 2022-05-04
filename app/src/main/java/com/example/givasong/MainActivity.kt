@@ -30,9 +30,9 @@ class MainActivity : AppCompatActivity() {
         val addMusic: Button = findViewById(R.id.add_music)
 
         // Get songs and attach them to the recyclerview
-        songs_data = getSongsFromSharedPreferences()
+        //songs_data = getSongsFromSharedPreferences()
 
-        val adapter = MusicAdapter(songs_data)
+        val adapter = MusicAdapter(applicationContext)
         rvSongs.adapter = adapter
         rvSongs.layoutManager = LinearLayoutManager(this)
 
@@ -51,36 +51,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getSongsFromSharedPreferences(): MutableList<Music> {
 
-        // Gets songs from sharedpreferences
-
-        val temp: MutableList<Music> = ArrayList()
-        var id = 0
-
-        val sharedPref = getSharedPreferences("Saved", MODE_PRIVATE)
-        val musicsList = sharedPref.getString("Saved", "")
-        print("Musics: $musicsList\n\n\n\n")
-        if (musicsList == null || musicsList == ""){
-            temp += (Music(0, "00:00", "Add a new music!", ""))
-        }
-        else {
-            val musicsArray = musicsList.split("\n")
-            musicsArray.forEach {
-                if(it.contains(";")){
-                    print("it: $it \n\n\n")
-                    val musicLine = it.split(";;")
-                    val musicObjTemp = Music(id, musicLine[0], musicLine[1], musicLine[2])
-                    temp += (musicObjTemp)
-
-                    id += 1
-                }
-
-            }
-
-        }
-        return temp
-    }
 
 }
 
