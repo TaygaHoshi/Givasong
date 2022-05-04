@@ -59,10 +59,14 @@ class MusicAdapter (private val appContext: Context) : RecyclerView.Adapter<Musi
         val artistNameView = viewHolder.artistNameTextView
         artistNameView.text = tempMusic.artist
 
-        viewHolder.itemView.setOnClickListener { onItemClick(tempMusic, position) }
+        viewHolder.itemView.setOnLongClickListener {
+
+            onItemClick(tempMusic, position)
+
+        }
     }
 
-    private fun onItemClick(music: Music, position: Int) {
+    private fun onItemClick(music: Music, position: Int):Boolean {
 
         chooseRandom(-1)
 
@@ -80,6 +84,7 @@ class MusicAdapter (private val appContext: Context) : RecyclerView.Adapter<Musi
         mMusic = getSongsFromSharedPreferences()
         notifyItemRemoved(position)
 
+        return true
 
     }
 
