@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 class MusicAdapter (private val mMusic: List<Music>) : RecyclerView.Adapter<MusicAdapter.ViewHolder>(){
 
     private var selectedPosition = -1
+    private var previousSelectedPosition = -1
     private lateinit var context: Context
 
 
@@ -65,8 +66,13 @@ class MusicAdapter (private val mMusic: List<Music>) : RecyclerView.Adapter<Musi
 
     fun chooseRandom(index: Int) {
         // Update the highlighted item based on its position
+
         selectedPosition = index
-        notifyDataSetChanged()
+
+        notifyItemChanged(selectedPosition)
+        notifyItemChanged(previousSelectedPosition)
+
+        previousSelectedPosition = selectedPosition
 
     }
 
