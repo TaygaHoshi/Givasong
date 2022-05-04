@@ -10,7 +10,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var musics: MutableList<Music>
+    private lateinit var songs_data: MutableList<Music>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,30 +20,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
         setContentView(R.layout.activity_main)
 
-        // get recycler view into variable
-        val rvContacts: RecyclerView = findViewById(R.id.rvMusic)
+        // Initialize recyclerview variable
+        val rvSongs: RecyclerView = findViewById(R.id.rvMusic)
 
-        // FAB and Button
+        // Initialize buttons' variables
         val fabGivasong: FloatingActionButton = findViewById(R.id.givasong_fab) //startActivity(Intent(this@MainActivity, OtherActivity::class.java))
         val addMusic: Button = findViewById(R.id.add_music)
 
+        // Get songs and attach them to the recyclerview
+        songs_data = getSongsFromSharedPreferences()
 
-        // Initialize music
-        //// get musics from file
-        musics = getMusicsFromFile()
-        //musics = Music.createMusicsList(20)
-
-        // Create adapter passing in the sample user data
-        val adapter = MusicAdapter(musics)
-        // Attach the adapter to the recyclerview to populate items
-        rvContacts.adapter = adapter
-        // Set layout manager to position the items
-        rvContacts.layoutManager = LinearLayoutManager(this)
+        val adapter = MusicAdapter(songs_data)
+        rvSongs.adapter = adapter
+        rvSongs.layoutManager = LinearLayoutManager(this)
 
 
+        // Buttons' OnClickListeners
         fabGivasong.setOnClickListener {
             val chosenIndex = (0 until adapter.itemCount).random()
             adapter.chooseRandom(chosenIndex)
@@ -57,7 +51,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getMusicsFromFile(): MutableList<Music> {
+    private fun getSongsFromSharedPreferences(): MutableList<Music> {
+
+        // Gets songs from sharedpreferences
 
         val temp: MutableList<Music> = ArrayList()
         var id = 0

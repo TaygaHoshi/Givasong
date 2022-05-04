@@ -12,12 +12,14 @@ class AddForm  : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_music_layout)
+
+        // Initialize textboxes and button
         val durationBox: EditText = findViewById(R.id.add_music_duration)
         val artistBox: EditText = findViewById(R.id.add_artist_name)
         val nameBox: EditText = findViewById(R.id.add_music_name)
-
         val button:Button = findViewById(R.id.add_music_button)
 
+        // Add music button OnClickListener
         button.setOnClickListener {
             addMusic(durationBox, artistBox, nameBox)
         }
@@ -26,6 +28,8 @@ class AddForm  : AppCompatActivity() {
 
 
     private fun addMusic(durationBox:EditText, artistBox:EditText, nameBox:EditText) {
+
+        // Updates SharedPreferences with newly added data
 
         val duration = durationBox.text
         val artist = artistBox.text
@@ -39,6 +43,7 @@ class AddForm  : AppCompatActivity() {
             apply()
         }
 
+        // Clear the textboxes
         durationBox.text.clear()
         artistBox.text.clear()
         nameBox.text.clear()

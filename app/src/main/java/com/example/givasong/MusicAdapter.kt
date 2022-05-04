@@ -12,45 +12,43 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MusicAdapter (private val mMusic: List<Music>) : RecyclerView.Adapter<MusicAdapter.ViewHolder>(){
 
-    private var selectedPosition = -1 //make it global
+    private var selectedPosition = -1
     private lateinit var context: Context
 
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // Your holder should contain and initialize a member variable
-        // for any view that will be set as you render a row
         val musicNameTextView: TextView = itemView.findViewById<TextView>(R.id.card_music_name)
         val artistNameTextView: TextView = itemView.findViewById<TextView>(R.id.card_artist_name)
         val durationTextView: TextView = itemView.findViewById<TextView>(R.id.card_music_duration)
     }
 
-    // ... constructor and member variables
-    // Usually involves inflating a layout from XML and returning the holder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicAdapter.ViewHolder {
-        context = parent.context
-        val inflater = LayoutInflater.from(context)
-        // Inflate the custom layout
-        val contactView = inflater.inflate(R.layout.muslc_card_layout, parent, false)
-        // Return a new holder instance
 
-        return ViewHolder(contactView)
+        context = parent.context
+
+        // Inflate the custom layout
+        val inflater = LayoutInflater.from(context)
+        val contactView = inflater.inflate(R.layout.muslc_card_layout, parent, false)
+
+        return ViewHolder(contactView) // Return a new holder instance
     }
 
-    // Involves populating data into the item through holder
-    override fun onBindViewHolder(viewHolder: MusicAdapter.ViewHolder, position: Int) {
 
+    override fun onBindViewHolder(viewHolder: MusicAdapter.ViewHolder, position: Int) {
+        // Populate data into the item through viewholder
+
+        // Highlight randomly selected item using theme colors
         if (selectedPosition == position){
             viewHolder.itemView.setBackgroundColor(context.themeColor(androidx.appcompat.R.attr.colorPrimary))
-
         }
         else{
             viewHolder.itemView.setBackgroundColor(context.themeColor(com.google.android.material.R.attr.colorOnPrimary))
-
         }
 
         // Get the data model based on position
         val tempMusic: Music = mMusic[position]
-        // Set item views based on your views and data model
+
+        // Set item views based on views and data model
         val musicDurationView = viewHolder.durationTextView
         musicDurationView.text = tempMusic.duration
         val musicNameView = viewHolder.musicNameTextView
@@ -59,18 +57,20 @@ class MusicAdapter (private val mMusic: List<Music>) : RecyclerView.Adapter<Musi
         artistNameView.text = tempMusic.artist
     }
 
-    // Returns the total count of items in the list
+
     override fun getItemCount(): Int {
+        // Returns the total count of items in the list
         return mMusic.size
     }
 
     fun chooseRandom(index: Int) {
-
+        // Update the highlighted item based on its position
         selectedPosition = index
         notifyDataSetChanged()
 
     }
 
+    // Get theme colors
     @ColorInt
     fun Context.themeColor(@AttrRes attrRes: Int): Int = TypedValue()
         .apply { theme.resolveAttribute (attrRes, this, true) }
