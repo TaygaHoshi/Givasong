@@ -59,10 +59,16 @@ class MusicAdapter (private val appContext: Context) : RecyclerView.Adapter<Musi
         val artistNameView = viewHolder.artistNameTextView
         artistNameView.text = tempMusic.artist
 
-        viewHolder.itemView.setOnClickListener { onItemClick(tempMusic, position) }
+        viewHolder.itemView.setOnLongClickListener {
+
+            onItemClick(tempMusic, position)
+
+        }
     }
 
-    private fun onItemClick(music: Music, position: Int) {
+    private fun onItemClick(music: Music, position: Int):Boolean {
+
+        chooseRandom(-1)
 
         val sharedPref = appContext.getSharedPreferences("Saved", MODE_PRIVATE)
         var temp = sharedPref.getString("Saved", "")
@@ -78,7 +84,7 @@ class MusicAdapter (private val appContext: Context) : RecyclerView.Adapter<Musi
         mMusic = getSongsFromSharedPreferences()
         notifyItemRemoved(position)
 
-
+        return true
 
     }
 
