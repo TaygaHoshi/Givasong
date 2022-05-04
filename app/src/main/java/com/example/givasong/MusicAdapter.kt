@@ -1,6 +1,7 @@
 package com.example.givasong
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +11,9 @@ import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.RecyclerView
 
-class MusicAdapter (private val mMusic: List<Music>) : RecyclerView.Adapter<MusicAdapter.ViewHolder>(){
+class MusicAdapter (private val appContext: Context) : RecyclerView.Adapter<MusicAdapter.ViewHolder>(){
 
+    private var mMusic: List<Music> = getSongsFromSharedPreferences()
     private var selectedPosition = -1
     private var previousSelectedPosition = -1
     private lateinit var context: Context
@@ -56,6 +58,59 @@ class MusicAdapter (private val mMusic: List<Music>) : RecyclerView.Adapter<Musi
         musicNameView.text = tempMusic.name
         val artistNameView = viewHolder.artistNameTextView
         artistNameView.text = tempMusic.artist
+
+        viewHolder.itemView.setOnClickListener { onItemClick(tempMusic, position) }
+    }
+
+    private fun onItemClick(music: Music, position: Int) {
+
+        val sharedPref = appContext.getSharedPreferences("Saved", MODE_PRIVATE)
+        var temp = sharedPref.getString("Saved", "")
+
+        temp = temp?.replace("${music.duration};;${music.artist};;${music.name}\n", "")
+
+        with (sharedPref.edit()) {
+            clear()
+            putString("Saved", temp)
+            commit()
+        }
+
+        mMusic = getSongsFromSharedPreferences()
+        notifyItemRemoved(position)
+
+
+
+    }
+
+    private fun getSongsFromSharedPreferences(): MutableList<Music> {
+
+        // Gets songs from sharedpreferences
+
+        val temp: MutableList<Music> = ArrayList()
+        var id = 0
+
+        val sharedPref = appContext.getSharedPreferences("Saved", MODE_PRIVATE)
+        val musicsList = sharedPref.getString("Saved", "")
+        print("Musics: $musicsList\n\n\n\n")
+        if (musicsList == null || musicsList == ""){
+            temp += (Music(0, "00:00", "Add a new music!", ""))
+        }
+        else {
+            val musicsArray = musicsList.split("\n")
+            musicsArray.forEach {
+                if(it.contains(";")){
+                    print("it: $it \n\n\n")
+                    val musicLine = it.split(";;")
+                    val musicObjTemp = Music(id, musicLine[0], musicLine[1], musicLine[2])
+                    temp += (musicObjTemp)
+
+                    id += 1
+                }
+
+            }
+
+        }
+        return temp
     }
 
 

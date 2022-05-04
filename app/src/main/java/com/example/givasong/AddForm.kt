@@ -37,10 +37,10 @@ class AddForm  : AppCompatActivity() {
         val temp = "$duration;;$artist;;$name\n"
 
         val sharedPref = getSharedPreferences("Saved",MODE_PRIVATE)
-        print("Added song $temp\n\n\n\n")
+
         with (sharedPref.edit()) {
             putString("Saved", sharedPref.getString("Saved", "") + temp)
-            apply()
+            commit()
         }
 
         // Clear the textboxes
