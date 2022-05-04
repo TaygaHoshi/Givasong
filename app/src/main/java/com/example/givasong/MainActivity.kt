@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         fabGivasong.setOnClickListener {
             val chosenIndex = (0 until adapter.itemCount).random()
             adapter.chooseRandom(chosenIndex)
-
+            rvSongs.scrollToPosition(chosenIndex)
         }
 
         addMusic.setOnClickListener {
