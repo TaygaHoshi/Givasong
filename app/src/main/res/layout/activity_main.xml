@@ -13,11 +13,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/givasongbutton"
+        app:layout_constraintTop_toBottomOf="@+id/add_music"
         app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/givasong_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
@@ -25,16 +25,16 @@
         android:clickable="true"
         android:contentDescription="@string/add_music_fab"
         android:focusable="true"
-        android:src="@android:drawable/ic_input_add"
+        android:src="@android:drawable/btn_star"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="ImageContrastCheck" />
 
     <Button
-        android:id="@+id/givasongbutton"
+        android:id="@+id/add_music"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/randomize_text"
+        android:text="@string/add_music_button"
         app:layout_constraintBottom_toTopOf="@+id/rvMusic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

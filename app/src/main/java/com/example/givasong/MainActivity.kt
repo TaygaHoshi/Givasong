@@ -26,14 +26,9 @@ class MainActivity : AppCompatActivity() {
         // get recycler view into variable
         val rvContacts: RecyclerView = findViewById(R.id.rvMusic)
 
-        // get FAB into variable
-        val fabToAddMusic: FloatingActionButton = findViewById(R.id.floatingActionButton) //startActivity(Intent(this@MainActivity, OtherActivity::class.java))
-        val givasongButton: Button = findViewById(R.id.givasongbutton)
-
-        fabToAddMusic.setOnClickListener {
-            val intent = Intent(this, AddForm::class.java).apply { }
-            startActivity(intent)
-        }
+        // FAB and Button
+        val fabGivasong: FloatingActionButton = findViewById(R.id.givasong_fab) //startActivity(Intent(this@MainActivity, OtherActivity::class.java))
+        val addMusic: Button = findViewById(R.id.add_music)
 
 
         // Initialize music
@@ -49,10 +44,15 @@ class MainActivity : AppCompatActivity() {
         rvContacts.layoutManager = LinearLayoutManager(this)
 
 
-
-        givasongButton.setOnClickListener {
+        fabGivasong.setOnClickListener {
             val chosenIndex = (0 until adapter.itemCount).random()
             adapter.chooseRandom(chosenIndex)
+
+        }
+
+        addMusic.setOnClickListener {
+            val intent = Intent(this, AddForm::class.java).apply { }
+            startActivity(intent)
         }
 
     }
